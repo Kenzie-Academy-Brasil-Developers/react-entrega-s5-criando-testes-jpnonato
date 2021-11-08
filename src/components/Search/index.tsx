@@ -13,6 +13,7 @@ const Search = () => {
       <div className="Search">
         <Input
           type="number"
+          value={cepNumber}
           placeholder="Insira o CEP"
           onChange={(event) => setCepNumber(event.target.value)}
         />

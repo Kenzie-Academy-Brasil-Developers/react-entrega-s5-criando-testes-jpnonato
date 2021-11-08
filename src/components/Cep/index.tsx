@@ -10,7 +10,7 @@ const Address = () => {
 
       {ceps.cep && (
         <div className="Address">
-          <Form>
+          <Form data-testid="formSearch">
             <Form.Field inline>
               <Header size="small">Logradouro</Header>
               <Input fluid value={ceps.logradouro} />
@@ -29,7 +29,7 @@ const Address = () => {
               )}
               <Form.Field inline>
                 <Header size="small">Complemento</Header>
-                <Input fluid placeholder="Apartamento, bloco, ..." on />
+                <Input fluid placeholder="Apartamento, bloco, ..." on data-testid="inputSearch"/>
               </Form.Field>
             </Form.Field>
             <Form.Field inline>

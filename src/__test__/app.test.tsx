@@ -1,12 +1,16 @@
 import {screen, render, fireEvent, waitFor} from '@testing-library/react'
+import React from 'react'
 import userEvent from "@testing-library/user-event"
 import Search from '../components/Search'
-import Adress from '../components/Cep/index'
+import Address from '../components/Cep/index'
+import { Toaster } from 'react-hot-toast'
 import api from '../services'
 import App from '../App'
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
 import Providers from '../providers'
+import { LocateCepProvider } from '../providers/CepProvider' 
+import { title } from 'process'
 
 
 const apiMock = new MockAdapter(api)
@@ -16,8 +20,10 @@ jest.mock("../providers/CepProvider", () => {
         useLocateCep: () =>({
             setCepNumber: jest.fn(),
             ceps: jest.fn(),
-            handleSearch: jest.fn() 
-        })
+            Providers: jest.fn(),
+            // cepNumber: jest.fn(),
+            handleSearch: jest.fn()   
+        }) 
     
     }
 })
@@ -50,23 +56,25 @@ describe("when everything is ok", () => {
     }) 
     test("when a available CEP is typed and the user click the button, will apear 6  new input's text ", async() => {
         apiMock.onGet("21820170").replyOnce(200, {"bairro": "Bangu", "cidade": "Rio de Janeiro", "logradouro": "Rua dos Tintureiros", "estado_info": {"area_km2": "43.781,566", "codigo_ibge": "33", "nome": "Rio de Janeiro"}, "cep": "21820170", "cidade_info": {"area_km2": "1200,179", "codigo_ibge": "3304557"}, "estado": "RJ"})
-        render(
-            <Providers>
+        
+        render(  
               <App />
-            </Providers>
-          );
+        )
+
         const input =  screen.getByPlaceholderText("Insira o CEP") 
         const button = screen.getByRole("button")
-        const form = await screen.queryByTestId("inputSearch") 
+         
 
-        userEvent.type(input, "21820170")   
+        userEvent.type(input, "21820170")    
         userEvent.click(button) 
 
-        await waitFor(() => {
-            expect(input).toHaveValue(21820170)    
-                 
-            expect(screen.getByDisplayValue('Rua dos Tintureiros')).toBeInTheDocument() 
-        })
+        const title = await screen.findByTestId("input")     
+
+        await waitFor(() => {       
+            expect(input).toHaveValue(21820170)       
+            expect(title).toBeInTheDocument()
+
+        })   
 
        
 

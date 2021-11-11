@@ -6,14 +6,14 @@ const Address = () => {
 
   return (
     <>
-      <Divider horizontal>Endereço buscado</Divider>
+      <Divider horizontal data-testid="input">Endereço buscado</Divider>
 
       {ceps.cep && (
         <div className="Address">
-          <Form data-testid="formSearch">
+          <Form >
             <Form.Field inline>
               <Header size="small">Logradouro</Header>
-              <Input fluid value={ceps.logradouro} />
+              <Input fluid value={ceps.logradouro}  />
             </Form.Field>
             <Form.Field inline>
               <Header size="small">Número</Header>
@@ -29,7 +29,7 @@ const Address = () => {
               )}
               <Form.Field inline>
                 <Header size="small">Complemento</Header>
-                <Input fluid placeholder="Apartamento, bloco, ..." on data-testid="inputSearch"/>
+                <Input fluid placeholder="Apartamento, bloco, ..." on />
               </Form.Field>
             </Form.Field>
             <Form.Field inline>

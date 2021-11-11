@@ -54,7 +54,7 @@ describe("when everything is ok", () => {
       
 
     }) 
-    test("when a available CEP is typed and the user click the button, will apear 6  new input's text ", async() => {
+    test("when a available CEP is typed and the user click the button, the Title `Endereço Buscado` must be in the screen ", async() => {
         apiMock.onGet("21820170").replyOnce(200, {"bairro": "Bangu", "cidade": "Rio de Janeiro", "logradouro": "Rua dos Tintureiros", "estado_info": {"area_km2": "43.781,566", "codigo_ibge": "33", "nome": "Rio de Janeiro"}, "cep": "21820170", "cidade_info": {"area_km2": "1200,179", "codigo_ibge": "3304557"}, "estado": "RJ"})
         
         render(  
